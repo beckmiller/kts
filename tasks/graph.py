@@ -31,24 +31,26 @@ class Graph:
         visited = []
         stack = [self._root]
         while stack:
-            node = stack.pop(0)
-            if node in stack:
+            node = stack.pop()
+            if node in visited:
                 continue
             visited.append(node)
-            for n in node.outbound:
-                if n not in stack:
+            for n in node.outbound[::-1]:
+                if n not in visited:
                     stack.append(n)
         return visited
 
     def bfs(self) -> list[Node]:
         result = []
         queue = [self._root]
+        visited = set()
 
         while queue:
             node = queue.pop(0)
-            result.append(node)
-            for neighbor in node.outbound:
-                if neighbor not in result:
+            if node not in visited:
+                result.append(node)
+                visited.add(node)
+                for neighbor in node.outbound:
                     queue.append(neighbor)
 
         return result

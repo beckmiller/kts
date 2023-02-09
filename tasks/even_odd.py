@@ -17,3 +17,5 @@ def even_odd(arr: list[int]) -> float:
         else:
             not_odd.append(i)
     return sum(odd) / sum(not_odd) if sum(not_odd) != 0 else 0
+
+
